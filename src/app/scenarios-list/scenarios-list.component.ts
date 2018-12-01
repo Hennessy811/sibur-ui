@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './scenarios-list.component.html',
   styleUrls: ['./scenarios-list.component.sass']
 })
+
 export class ScenariosListComponent implements OnInit {
 
   constructor() { }

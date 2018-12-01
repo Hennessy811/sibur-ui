@@ -1,8 +1,8 @@
 <div class="container">
   <div class="scenarios-block">
-    <app-scenarios-list></app-scenarios-list>
+    <app-scenarios-list *ngIf="!isCreating"></app-scenarios-list>
     <mat-divider></mat-divider>
-    <app-scenarios-form></app-scenarios-form>
+    <app-scenarios-form *ngIf="isCreating"></app-scenarios-form>
     <mat-divider></mat-divider>
   </div>
   <div class="events-block">
