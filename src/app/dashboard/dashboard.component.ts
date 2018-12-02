@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
       },
       people: {
         isAllowed: true,
-        quantity: 4,
+        quantity: 10,
         isIndividualProtectionRequired: false,
         actionsSuspected: ['лежит', 'бежит']
       },
@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
         isAllowed: true,
         smoke: false,
         maintenance: true,
-        fire: false
+        fire: true
       },
       status: false,
       savedAsTemplate: true

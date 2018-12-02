@@ -17,7 +17,7 @@ export class VideoReportComponent implements OnInit {
         display: true,
         eye : "Камера 7",
 				place : "Цех 11",
-				video : "assets/video/l_05_persons_0_01.mp4",
+				video : "assets/video/l_05_persons_0_smoke_1_01.mp4",
 				data : '10:48',
 				tags : [
 					{
@@ -42,7 +42,7 @@ export class VideoReportComponent implements OnInit {
       display: true,
       eye : "Камера 13",
       place : "Цех 13",
-      video : "assets/video/l_07_persons_1_01.mp4",
+      video : "assets/video/l_07_persons_0_01.mp4",
       data : '10:49',
       tags : [
         {
