@@ -4,6 +4,8 @@
       *ngIf="!isCreating"
       [casesList]="casesList"
       (newCase)="newCase($event)"
+      (fError)="fError($event)"
+      (sError)="sError($event)"
       (removeCase)="removeCase($event)"></app-scenarios-list>
     <mat-divider></mat-divider>
     <app-scenarios-form
@@ -14,7 +16,10 @@
     <mat-divider></mat-divider>
   </div>
   <div class="events-block">
-    <app-video-report></app-video-report>
+    <app-video-report
+    [firstError]="firstError"
+    [secondError]="secondError"
+    ></app-video-report>
     <mat-divider></mat-divider>
   </div>
 </div>

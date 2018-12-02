@@ -31,7 +31,8 @@ import {
   MatMenuModule,
   MatProgressSpinnerModule,
   MatSelectModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatGridListModule
 } from "@angular/material";
 
 import {VgCoreModule} from 'videogular2/core';
@@ -98,7 +99,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatChipsModule,
     ReactiveFormsModule,
     MatBadgeModule,
-    AppRoutingModule
+	AppRoutingModule,
+	MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

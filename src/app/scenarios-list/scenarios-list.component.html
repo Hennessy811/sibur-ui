@@ -54,6 +54,7 @@
           <div class="case-item_status">
             <mat-checkbox
               [checked]="item.status"
+              (change)="firstError(item.id)"
               [labelPosition]="after"
               [disabled]="false">
             </mat-checkbox>

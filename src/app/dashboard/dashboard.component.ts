@@ -9,6 +9,16 @@ export class DashboardComponent implements OnInit {
 
   constructor() { }
 
+  firstError = false;
+  secondError = false;
+
+  fError(id) {
+    this.firstError = true;
+  }
+  sError(id) {
+    this.secondError = true;
+  }
+
   casesList = [
     {
       id: 1,
@@ -29,7 +39,7 @@ export class DashboardComponent implements OnInit {
         maintenance: true,
         fire: true
       },
-      status: true,
+      status: false,
       savedAsTemplate: true
     },
     {
@@ -51,7 +61,7 @@ export class DashboardComponent implements OnInit {
         maintenance: false,
         fire: true
       },
-      status: true,
+      status: false,
       savedAsTemplate: true
     },
     {
@@ -73,7 +83,7 @@ export class DashboardComponent implements OnInit {
         maintenance: true,
         fire: false
       },
-      status: true,
+      status: false,
       savedAsTemplate: true
     },
     {
