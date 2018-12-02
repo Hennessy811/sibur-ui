@@ -1,14 +1,20 @@
 <div class="container">
   <div class="scenarios-block">
-    <app-scenarios-list *ngIf="!isCreating"></app-scenarios-list>
+    <app-scenarios-list
+      *ngIf="!isCreating"
+      [casesList]="casesList"
+      (newCase)="newCase($event)"
+      (removeCase)="removeCase($event)"></app-scenarios-list>
     <mat-divider></mat-divider>
-    <app-scenarios-form *ngIf="isCreating"></app-scenarios-form>
+    <app-scenarios-form
+      *ngIf="isCreating"
+      (discardAdd)="discardAdd()"
+      (create)="addCase($event)"
+    ></app-scenarios-form>
     <mat-divider></mat-divider>
   </div>
   <div class="events-block">
     <app-video-report></app-video-report>
-    <mat-divider></mat-divider>
-    <app-events-report></app-events-report>
     <mat-divider></mat-divider>
   </div>
 </div>

@@ -1,3 +1,111 @@
-<p>
-  video-report works!
-</p>
+<mat-card class="h-100">
+
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon [matBadge]="storys.error.length" matBadgeColor="warn">error</mat-icon>
+      Нештатная ситуация
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <mat-expansion-panel
+    class="mt-4 mb-4"
+    *ngFor="let story of storys.error"
+    (opened)="story.open = true"
+    (closed)="story.open = false">
+
+    <mat-expansion-panel-header class="mat-expansion-panel-header">
+      <mat-panel-title>
+        <div class="title-video">
+          <vg-player *ngIf="!story.open" class="vg-player">
+            <video #myMedia
+                   [vgMedia]="myMedia"
+                   [id]="story.id"
+                   [src]="story.video"
+                   autoplay="true"
+                   type="video/mp4">
+            </video>
+          </vg-player>
+        </div>
+        <span class="ml-1 mr-1">{{story.eye}} <br> {{story.place}}</span>
+      </mat-panel-title>
+      <mat-panel-description>
+        <mat-chip-list class="ml-2">
+          <mat-chip *ngFor="let tag of story.tags" [color]="tag.color" selected class="mt-1 mb-1 ">{{tag.name}}</mat-chip>
+        </mat-chip-list>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <p>
+      <vg-player *ngIf="story.open">
+        <video #myMedia
+               [vgMedia]="myMedia"
+               [id]="story.id"
+               [src]="story.video"
+               autoplay="true"
+               type="video/mp4">
+        </video>
+      </vg-player>
+    </p>
+    <button mat-raised-button color="warn">Обработано</button>
+
+  </mat-expansion-panel>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-header class="mt-5">
+    <mat-card-title>
+      <mat-icon [matBadge]="storys.warning.length" matBadgeColor="warn">warning</mat-icon>
+      Опасность
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <mat-expansion-panel
+    class="mt-4 mb-4"
+    (opened)="story.open = true"
+    (closed)="story.open = false"
+    *ngFor="let story of storys.warning">
+
+    <mat-expansion-panel-header class="mat-expansion-panel-header">
+      <mat-panel-title>
+        <vg-player class="vg-player" *ngIf="!story.open">
+          <video #myMedia
+                 [vgMedia]="myMedia"
+                 [id]="story.id"
+                 [src]="story.video"
+                 autoplay="true"
+                 type="video/mp4">
+          </video>
+        </vg-player>
+        <span class="ml-1 mr-1">{{story.eye}} <br> {{story.place}}</span>
+      </mat-panel-title>
+      <mat-panel-description>
+        <mat-chip-list class="ml-2">
+          <mat-chip *ngFor="let tag of story.tags" [color]="tag.color" selected>{{tag.name}}</mat-chip>
+        </mat-chip-list>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <p>
+      <vg-player *ngIf="story.open">
+        <video #myVideoRef
+               [vgMedia]="myVideoRef"
+               [src]="story.video"
+               src=""></video>
+
+        <video #myMedia
+               [vgMedia]="myMedia"
+               [id]="story.id"
+               [src]="story.video"
+               autoplay="true"
+               type="video/mp4">
+        </video>
+      </vg-player>
+    </p>
+    <button mat-raised-button color="warn">Обработано</button>
+
+  </mat-expansion-panel>
+</mat-card>

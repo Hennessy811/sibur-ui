@@ -7,21 +7,44 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ScenariosListComponent } from './scenarios-list/scenarios-list.component';
 import { ScenariosFormComponent } from './scenarios-form/scenarios-form.component';
-import { HeaderComponent } from './shared/header/header.component';
+import {
+  DialogOverviewExampleDialog1, DialogOverviewExampleDialog2, DialogOverviewExampleDialog3,
+  DialogOverviewExampleDialog4, DialogOverviewExampleDialog5, DialogOverviewExampleDialog6,
+  HeaderComponent
+} from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import {
-  MatButtonModule, MatButtonToggleModule,
+  MatBadgeModule,
+  MatButtonModule,
+  MatButtonToggleModule,
   MatCardModule,
   MatCheckboxModule,
-  MatCommonModule, MatDatepickerModule, MatDividerModule, MatExpansionModule,
+  MatChipsModule,
+  MatCommonModule,
+  MatDatepickerModule,
+  MatDividerModule,
+  MatExpansionModule,
   MatFormFieldModule,
-  MatIconModule, MatListModule, MatMenuModule, MatProgressSpinnerModule, MatSelectModule, MatToolbarModule
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatProgressSpinnerModule,
+  MatSelectModule,
+  MatToolbarModule
 } from "@angular/material";
+
+import {VgCoreModule} from 'videogular2/core';
+import {VgControlsModule} from 'videogular2/controls';
+// import {VgOverlayPlayModule} from 'videogular2/overlay-play';
+// import {VgBufferingModule} from 'videogular2/buffering';
+
 import {HttpClientModule} from "@angular/common/http";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VideoReportComponent } from './video-report/video-report.component';
 import { EventsReportComponent } from './events-report/events-report.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -33,16 +56,33 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     FooterComponent,
     DashboardComponent,
     VideoReportComponent,
-    EventsReportComponent
+    EventsReportComponent,
+    DialogOverviewExampleDialog1,
+    DialogOverviewExampleDialog2,
+    DialogOverviewExampleDialog3,
+    DialogOverviewExampleDialog4,
+    DialogOverviewExampleDialog5,
+    DialogOverviewExampleDialog6
+  ],
+  entryComponents: [
+    DialogOverviewExampleDialog1,
+    DialogOverviewExampleDialog2,
+    DialogOverviewExampleDialog3,
+    DialogOverviewExampleDialog4,
+    DialogOverviewExampleDialog5,
+    DialogOverviewExampleDialog6
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     NgbModule,
+    VgCoreModule,
+    VgControlsModule,
     MatCardModule,
     HttpClientModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatInputModule,
     MatIconModule,
     MatCheckboxModule,
     MatCommonModule,
@@ -55,6 +95,9 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatButtonToggleModule,
+    MatChipsModule,
+    ReactiveFormsModule,
+    MatBadgeModule,
     AppRoutingModule
   ],
   providers: [],

@@ -5,4 +5,67 @@
     </mat-card-title>
   </mat-card-header>
   <mat-divider></mat-divider>
+  <mat-card-content>
+    <div class="card-content mt-3">
+
+      <mat-card *ngFor="let item of casesList" class="mt-2 mb-2">
+        <mat-card-content class="case-item_container">
+          <div class="case-item_left-side">
+            <div class="case-item_title">{{ item.title }}</div>
+            <div class="case-item_tags mt-2">
+              <mat-chip-list class="tags-list tags-people">
+                <mat-chip class="tags-list_item"
+                          *ngIf="!item.people.isAllowed"
+                          color="warn">
+                  ЛЮДИ
+                </mat-chip>
+                <mat-chip class="tags-list_item"
+                          *ngIf="item.people.isAllowed"
+                          color="warn">
+                  {{item.people.quantity}} человек
+                </mat-chip>
+                <mat-chip class="tags-list_item"
+                          *ngIf="item.people.isAllowed && item.people.isIndividualProtectionRequired"
+                          color="warn">
+                  СИЗ
+                </mat-chip>
+                <mat-chip class="tags-list_item"
+                          *ngIf="item.people.isAllowed"
+                          color="warn">
+                  {{item.people.actionsSuspected}}
+                </mat-chip>
+              </mat-chip-list>
+              <mat-chip-list class="tags-list tags-factors">
+                <mat-chip class="tags-list_item"
+                          *ngIf="item.factors.isAllowed && !item.factors.smoke">
+                  ДЫМ
+                </mat-chip>
+                <mat-chip class="tags-list_item"
+                          *ngIf="item.factors.isAllowed && !item.factors.maintenance">
+                  Работы
+                </mat-chip>
+                <mat-chip class="tags-list_item"
+                          *ngIf="item.factors.isAllowed && !item.factors.fire">
+                  ОГОНЬ
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+          </div>
+          <div class="case-item_status">
+            <mat-checkbox
+              [checked]="item.status"
+              [labelPosition]="after"
+              [disabled]="false">
+            </mat-checkbox>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    <mat-card-actions>
+      <button mat-raised-button
+              class="ml-2"
+              (click)="addCase()"
+              color="primary">Добавить</button>
+    </mat-card-actions>
+    </div>
+  </mat-card-content>
 </mat-card>

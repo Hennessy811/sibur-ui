@@ -1,1 +1,12 @@
-<mat-toolbar color="primary" class="mb-5">SIBUR Monitoring</mat-toolbar>
+<mat-toolbar color="primary" class="mb-5">
+  <div class="container demo-popups">
+    <p>SIBUR Monitoring</p>
+    <div>
+      <button (click)="openDialog1()" mat-mini-fab class="ml-2">1</button>
+      <button (click)="openDialog2()" mat-mini-fab class="ml-2">2</button>
+      <button (click)="openDialog3()" mat-mini-fab class="ml-2">3</button>
+      <button (click)="openDialog4()" mat-mini-fab class="ml-2">4</button>
+      <button (click)="openDialog5()" mat-mini-fab class="ml-2">5</button>
+    </div>
+  </div>
+</mat-toolbar>
