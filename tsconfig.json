@@ -16,6 +16,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-polygon-draw": [
+        "dist/ngx-polygon-draw"
+      ],
+      "ngx-polygon-draw/*": [
+        "dist/ngx-polygon-draw/*"
+      ]
+    }
   }
 }

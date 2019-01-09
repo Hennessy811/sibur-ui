@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {v4 as uuid} from 'uuid';
 
 @Component({
   selector: 'app-scenarios-form',
@@ -9,6 +10,10 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 export class ScenariosFormComponent implements OnInit {
 
   addCase: FormGroup;
+  @Output() discardAdd = new EventEmitter();
+  @Output() create = new EventEmitter();
+  newCase = {};
+
   constructor(fb: FormBuilder) {
     this.addCase = fb.group({
       title: '',
@@ -21,41 +26,32 @@ export class ScenariosFormComponent implements OnInit {
       maintenance: false
     });
   }
-  @Output() discardAdd = new EventEmitter();
-  @Output() create = new EventEmitter();
-  newCase = {};
 
   cancel() {
     this.discardAdd.emit();
   }
 
+  created(event) {
+    console.log(event)
+  }
+
   add() {
-    this.newCase = {
-      id: 5,
-      title: this.addCase.value.title,
-      dates: {
-        startDate: '2018.11.24T11:28',
-        endDate: '2018.11.24T15:00'
-      },
-      people: {
-        isAllowed: this.addCase.value.isPeopleAllowed,
-        quantity: this.addCase.value.peopleQuantity,
-        isIndividualProtectionRequired: this.addCase.value.isPersonalProtectionRequired,
-        actionsSuspected: ['лежит', 'бежит']
-      },
-      factors: {
-        isAllowed: this.addCase.value.isFactors,
-        smoke: this.addCase.value.smoke,
-        maintenance: this.addCase.value.maintenance,
-        fire: this.addCase.value.fire
-      },
-      status: false,
-      savedAsTemplate: true
-    };
-    this.create.emit(this.newCase);
+    let caseToAdd: object = this.addCase.value;
+    caseToAdd['uuid'] = uuid();
+    if (this.addCase.valid) this.create.emit(caseToAdd);
   }
 
   ngOnInit() {
+    this.addCase = new FormGroup({
+      rangeFrom: new FormControl(),
+      rangeTo: new FormControl(),
+      title: new FormControl(),
+      isPeopleAllowed: new FormControl(),
+      peopleQuantity: new FormControl(),
+      isPersonalProtectionRequired: new FormControl(),
+      smoke: new FormControl(),
+      fire: new FormControl(),
+    })
   }
 
 }

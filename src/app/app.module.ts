@@ -1,18 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { ScenariosListComponent } from './scenarios-list/scenarios-list.component';
-import { ScenariosFormComponent } from './scenarios-form/scenarios-form.component';
-import {
-  DialogOverviewExampleDialog1, DialogOverviewExampleDialog2, DialogOverviewExampleDialog3,
-  DialogOverviewExampleDialog4, DialogOverviewExampleDialog5, DialogOverviewExampleDialog6,
-  HeaderComponent
-} from './shared/header/header.component';
-import { FooterComponent } from './shared/footer/footer.component';
+import {ScenariosListComponent} from './scenarios-list/scenarios-list.component';
+import {ScenariosFormComponent} from './scenarios-form/scenarios-form.component';
+import {HeaderComponent} from './shared/header/header.component';
+import {FooterComponent} from './shared/footer/footer.component';
+import { OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
+
 import {
   MatBadgeModule,
   MatButtonModule,
@@ -25,27 +23,30 @@ import {
   MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
+  MatGridListModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
-  MatMenuModule,
+  MatMenuModule, MatNativeDateModule,
   MatProgressSpinnerModule,
   MatSelectModule,
-  MatToolbarModule,
-  MatGridListModule
+  MatToolbarModule
 } from "@angular/material";
 
 import {VgCoreModule} from 'videogular2/core';
 import {VgControlsModule} from 'videogular2/controls';
+import {HttpClientModule} from "@angular/common/http";
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {VideoReportComponent} from './video-report/video-report.component';
+import {EventsReportComponent} from './events-report/events-report.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {CommonModule} from "@angular/common";
+import {PolygonDrawComponent} from './polygon-draw/polygon-draw.component';
+import {NgxPolygonDrawModule} from "../../projects/ngx-polygon-draw/src/lib/ngx-polygon-draw.module";
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
 // import {VgOverlayPlayModule} from 'videogular2/overlay-play';
 // import {VgBufferingModule} from 'videogular2/buffering';
-
-import {HttpClientModule} from "@angular/common/http";
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { VideoReportComponent } from './video-report/video-report.component';
-import { EventsReportComponent } from './events-report/events-report.component';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -58,23 +59,13 @@ import {ReactiveFormsModule} from "@angular/forms";
     DashboardComponent,
     VideoReportComponent,
     EventsReportComponent,
-    DialogOverviewExampleDialog1,
-    DialogOverviewExampleDialog2,
-    DialogOverviewExampleDialog3,
-    DialogOverviewExampleDialog4,
-    DialogOverviewExampleDialog5,
-    DialogOverviewExampleDialog6
-  ],
-  entryComponents: [
-    DialogOverviewExampleDialog1,
-    DialogOverviewExampleDialog2,
-    DialogOverviewExampleDialog3,
-    DialogOverviewExampleDialog4,
-    DialogOverviewExampleDialog5,
-    DialogOverviewExampleDialog6
+    PolygonDrawComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
     BrowserAnimationsModule,
     NgbModule,
     VgCoreModule,
@@ -90,6 +81,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatDividerModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatNativeDateModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     MatListModule,
     MatMenuModule,
     MatExpansionModule,
@@ -99,10 +93,14 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatChipsModule,
     ReactiveFormsModule,
     MatBadgeModule,
-	AppRoutingModule,
-	MatGridListModule
+    AppRoutingModule,
+    MatGridListModule,
+    NgxPolygonDrawModule
   ],
-  providers: [],
+  providers: [
+    {provide: OWL_DATE_TIME_LOCALE, useValue: 'ru'}
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

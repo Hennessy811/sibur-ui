@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {NgxPolygonDrawComponent} from "../../../projects/ngx-polygon-draw/src/lib/ngx-polygon-draw.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,107 +8,58 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
-
-  firstError = false;
-  secondError = false;
-
-  fError(id) {
-    this.firstError = true;
+  constructor() {
   }
-  sError(id) {
-    this.secondError = true;
+
+  created(event) {
+    console.log(event);
+  }
+
+  @ViewChild(NgxPolygonDrawComponent)
+  private poly: NgxPolygonDrawComponent;
+
+  undo() {
+    this.poly.undo();
+  }
+
+  clearCanvas() {
+    this.poly.clear_canvas();
   }
 
   casesList = [
     {
-      id: 1,
-      title: 'Зона 1 | Ведутся работы',
-      dates: {
-        startDate: '2018.11.24T11:28',
-        endDate: '2018.11.24T15:00'
-      },
-      people: {
-        isAllowed: true,
-        quantity: 4,
-        isIndividualProtectionRequired: true,
-        actionsSuspected: ['лежит', 'бежит']
-      },
-      factors: {
-        isAllowed: true,
-        smoke: true,
-        maintenance: true,
-        fire: true
-      },
-      status: false,
-      savedAsTemplate: true
+      fire: true,
+      isPeopleAllowed: true,
+      isPersonalProtectionRequired: true,
+      peopleQuantity: 5,
+      rangeFrom: ['Mon Dec 17 2018 14:36:32 GMT+0300 (Москва, стандартное время)', undefined],
+      rangeTo: [undefined, 'Mon Dec 17 2018 14:36:32 GMT+0300 (Москва, стандартное время)'],
+      smoke: true,
+      zone: 3,
+      title: "Стандартный режим"
     },
     {
-      id: 2,
-      title: 'Зона 1 | Вход запрещен',
-      dates: {
-        startDate: '2018.11.24T15:12',
-        endDate: '2018.11.24T16:40'
-      },
-      people: {
-        isAllowed: false,
-        quantity: 0,
-        isIndividualProtectionRequired: true,
-        actionsSuspected: []
-      },
-      factors: {
-        isAllowed: true,
-        smoke: true,
-        maintenance: false,
-        fire: true
-      },
-      status: false,
-      savedAsTemplate: true
+      fire: true,
+      isPeopleAllowed: true,
+      isPersonalProtectionRequired: true,
+      peopleQuantity: 5,
+      rangeFrom: ['Mon Dec 17 2018 14:36:32 GMT+0300 (Москва, стандартное время)', undefined],
+      rangeTo: [undefined, 'Mon Dec 17 2018 14:36:32 GMT+0300 (Москва, стандартное время)'],
+      smoke: true,
+      zone: 3,
+      title: "Стандартный режим"
     },
     {
-      id: 3,
-      title: 'Зона 3 | Стандартый режим',
-      dates: {
-        startDate: '2018.11.24T07:00',
-        endDate: '2018.11.24T20:00'
-      },
-      people: {
-        isAllowed: true,
-        quantity: 10,
-        isIndividualProtectionRequired: false,
-        actionsSuspected: ['лежит', 'бежит']
-      },
-      factors: {
-        isAllowed: true,
-        smoke: false,
-        maintenance: true,
-        fire: true
-      },
-      status: false,
-      savedAsTemplate: true
+      fire: true,
+      isPeopleAllowed: true,
+      isPersonalProtectionRequired: true,
+      peopleQuantity: 5,
+      rangeFrom: ['Mon Dec 17 2018 14:36:32 GMT+0300 (Москва, стандартное время)', undefined],
+      rangeTo: [undefined, 'Mon Dec 17 2018 14:36:32 GMT+0300 (Москва, стандартное время)'],
+      smoke: true,
+      zone: 3,
+      title: "Стандартный режим"
     },
-    {
-      id: 4,
-      title: 'Зона 4 | Стандартый режим',
-      dates: {
-        startDate: '2018.11.24T07:00',
-        endDate: '2018.11.24T20:00'
-      },
-      people: {
-        isAllowed: true,
-        quantity: 4,
-        isIndividualProtectionRequired: false,
-        actionsSuspected: ['лежит', 'бежит']
-      },
-      factors: {
-        isAllowed: true,
-        smoke: false,
-        maintenance: true,
-        fire: false
-      },
-      status: false,
-      savedAsTemplate: true
-    }
   ];
   isCreating = false;
 
@@ -120,6 +72,7 @@ export class DashboardComponent implements OnInit {
   }
 
   addCase(event) {
+    console.log(event);
     this.casesList.push(event);
     this.isCreating = false;
   }

@@ -1,43 +1,76 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      Создать сценарий
-    </mat-card-title>
-  </mat-card-header>
-  <mat-divider></mat-divider>
-  <mat-card-content>
+<div class="scenarios-form_wrapper">
+  <mat-card class="scenarios-form_item">
+    <mat-card-header>
+      <mat-card-title>
+        Создать сценарий
+      </mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
 
-    <mat-card class="mt-4">
-      <mat-card-content>
-        <form class="example-container" [formGroup]="addCase">
-          <mat-form-field>
-            <input formControlName="title" min="0" matInput placeholder="Название">
-          </mat-form-field>
-          <br>
-          <mat-checkbox formControlName="isPeopleAllowed">Люди</mat-checkbox>
-          <br>
-          <mat-form-field>
-            <input formControlName="peopleQuantity" type="number" min="0" matInput placeholder="Количество людей">
-          </mat-form-field>
-          <br>
-          <mat-checkbox formControlName="isPersonalProtectionRequired">СИЗ</mat-checkbox>
-          <br>
-          <mat-checkbox formControlName="isFactors">Доп. факторы</mat-checkbox>
-          <br>
-          <mat-checkbox formControlName="smoke">Дым</mat-checkbox>
-          <br>
-          <mat-checkbox formControlName="maintenance">Ведутся работы</mat-checkbox>
-          <br>
-          <mat-checkbox formControlName="fire">Огонь</mat-checkbox>
-          <br>
-        </form>
-      </mat-card-content>
-    </mat-card>
+      <mat-card class="mt-4">
+        <mat-card-content>
+          <form class="example-container" [formGroup]="addCase">
+            <mat-form-field class="w-100">
+              <input
+                formControlName="title"
+                matInput
+                placeholder="Название"
+                required
+              >
+            </mat-form-field>
+            <br>
+            <mat-form-field class="w-25">
+              <input
+                matInput
+                [required]="!!addCase.value.rangeTo"
+                [owlDateTimeTrigger]="dt12"
+                [owlDateTime]="dt12"
+                placeholder="Начало интервала"
+                formControlName="rangeFrom"
+                [selectMode]="'rangeFrom'">
+            </mat-form-field>
+            <owl-date-time #dt12></owl-date-time>
+            <mat-form-field class="w-25 ml-4">
+              <input
+                matInput
+                [required]="!!addCase.value.rangeFrom"
+                [owlDateTimeTrigger]="dt13"
+                [owlDateTime]="dt13"
+                placeholder="Конец интервала"
+                formControlName="rangeTo"
+                [selectMode]="'rangeTo'">
+            </mat-form-field>
+            <owl-date-time #dt13></owl-date-time>
+            <br>
 
-    <mat-card-actions>
-      <button mat-raised-button color="warn" class="ml-2 mr-2" (click)="cancel()">Отменить</button>
-      <button mat-raised-button color="primary" class="ml-2" (click)="add()">Добавить</button>
-    </mat-card-actions>
-  </mat-card-content>
+            <mat-checkbox formControlName="isPeopleAllowed">Люди</mat-checkbox>
+            <br>
+            <mat-form-field>
+              <input formControlName="peopleQuantity" type="number" min="0" matInput placeholder="Количество людей">
+            </mat-form-field>
+            <br>
+            <mat-checkbox formControlName="isPersonalProtectionRequired">СИЗ</mat-checkbox>
+            <br>
+            <mat-checkbox formControlName="smoke">Дым</mat-checkbox>
+            <br>
+            <mat-checkbox formControlName="fire">Огонь</mat-checkbox>
+          </form>
+        </mat-card-content>
+      </mat-card>
 
-</mat-card>
+      <mat-card-actions>
+        <button mat-raised-button color="warn" class="ml-2 mr-2" (click)="cancel()">Отменить</button>
+        <button mat-raised-button color="primary" class="ml-2" (click)="add()">Добавить</button>
+      </mat-card-actions>
+    </mat-card-content>
+
+  </mat-card>
+  <Ngx-NgxPolygonDraw
+    class="scenarios-form_item"
+    [height]="'480'"
+    [width]="'640'"
+    [src]="'assets/img/frame.png'"
+    (created)="created($event)"></Ngx-NgxPolygonDraw>
+</div>
+

@@ -134,6 +134,41 @@
           }
         }
       }
+    },
+    "NgxPolygonDraw": {
+      "root": "projects/ngx-polygon-draw",
+      "sourceRoot": "projects/ngx-polygon-draw/src",
+      "projectType": "library",
+      "prefix": "Ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-polygon-draw/tsconfig.lib.json",
+            "project": "projects/ngx-polygon-draw/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-polygon-draw/src/test.ts",
+            "tsConfig": "projects/ngx-polygon-draw/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-polygon-draw/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-polygon-draw/tsconfig.lib.json",
+              "projects/ngx-polygon-draw/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "sibur-ui"
