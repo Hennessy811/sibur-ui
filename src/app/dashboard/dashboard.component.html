@@ -1,15 +1,22 @@
 <div class="container">
-  <div class="scenarios-block">
+  <div class="scenarios-block" *ngIf="zonesArray">
     <app-scenarios-list
       class="scenarios-list"
-      *ngIf="!isCreating"
-      [casesList]="casesList"
+      *ngIf="!isEditing"
+      [zonesArray]="zonesArray"
       (newCase)="newCase($event)"
-      (removeCase)="removeCase($event)"></app-scenarios-list>
+      (editCase)="editSituation($event)"
+      (removeCase)="removeCase($event)">
+    </app-scenarios-list>
+
     <mat-divider></mat-divider>
+
     <app-scenarios-form
+      #ref
       class="scenarios-list"
-      *ngIf="isCreating"
+      *ngIf="isEditing"
+      [isEditing]="isEditing"
+      [zonesArray]="zonesArray"
       (discardAdd)="discardAdd()"
       (create)="addCase($event)"
     ></app-scenarios-form>

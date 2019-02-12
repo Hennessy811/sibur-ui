@@ -1,0 +1,12 @@
+{
+  "name": "ngx-polygon-draw",
+  "version": "1.0.4",
+  "description": "Simple lightweight library to draw polygons over images. This library was created to markup areas on the photo, where the computer vision algorithms will track events. Any other usecase is appreciated, contact me on issues.",
+  "author": "Malakhov Dmitriy",
+  "license": "MIT",
+  "keywords": ["angular", "component", "typescript","canvas", "images", "markup", "draw"],
+  "peerDependencies": {
+    "@angular/common": "^7.0.0",
+    "@angular/core": "^7.0.0"
+  }
+}

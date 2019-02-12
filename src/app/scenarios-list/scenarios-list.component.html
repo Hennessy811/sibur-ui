@@ -10,226 +10,62 @@
 
       <mat-accordion>
         <mat-accordion>
-          <mat-expansion-panel>
+          <mat-expansion-panel *ngFor="let zone of getNotEmptyZones(zonesArray)">
             <mat-expansion-panel-header>
-              Группа "Зона {{casesList[0].zone}}"
+              {{zone.name}}
             </mat-expansion-panel-header>
-            <mat-expansion-panel>
+            <mat-expansion-panel *ngFor="let camera of getNotEmptyCameras(zone.camerasList)">
               <mat-expansion-panel-header>
-                Группа "Камера {{casesList[0].zone}}"
+                {{camera.name}}
               </mat-expansion-panel-header>
-              <mat-card *ngFor="let item of casesList" class="mt-2 mb-2">
-                <mat-card-content class="case-item_container">
-                  <div class="case-item_left-side">
-                    <div class="case-item_title">Зона {{ item.zone }} | {{ item.title }}</div>
-                    <div class="case-item_tags mt-2">
-                      <mat-chip-list class="tags-list tags-people">
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="!item.isPeopleAllowed"
-                                  color="warn">
-                          ЛЮДИ
-                        </mat-chip>
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.isPeopleAllowed"
-                                  color="warn">
-                          До {{item.peopleQuantity}} человек
-                        </mat-chip>
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.isPeopleAllowed && item.isPersonalProtectionRequired"
-                                  color="warn">
-                          СИЗ
-                        </mat-chip>
-                      </mat-chip-list>
-                      <mat-chip-list class="tags-list tags-factors">
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.smoke">
-                          ДЫМ
-                        </mat-chip>
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.fire">
-                          ОГОНЬ
-                        </mat-chip>
-                      </mat-chip-list>
-                    </div>
-                  </div>
-                  <div class="case-item_status">
-                    <mat-checkbox
-                      [checked]="item.status"
-                      (change)="checked(item.id)"
-                      [labelPosition]="after"
-                      [disabled]="false">
-                    </mat-checkbox>
-                  </div>
-                </mat-card-content>
-              </mat-card>
 
-              <mat-action-row>
-                <button mat-flat-button color="primary" class="mr-2">Включить всю группу</button>
-                <button mat-raised-button color="warn" class="ml-2">Выключить всю группу</button>
-              </mat-action-row>
-            </mat-expansion-panel>
-          </mat-expansion-panel>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              Группа "Зона 1"
-            </mat-expansion-panel-header>
+              <div class="situation-item_wrapper">
+                <mat-card
+                  *ngFor="let situation of camera.situationsList"
+                  class="mt-2 mb-2">
+                  <mat-card-content class="case-item_container">
+                    <div class="case-item_left-side">
+                      <div class="case-item_title">{{ situation.name }}</div>
+                      <div class="case-item_tags mt-2">
+                        <mat-chip-list class="tags-list tags-people">
+                          <mat-chip class="tags-list_item"
+                                    *ngFor="let item of situation.factors"
+                                    color="warn">
+                            {{item}}
+                          </mat-chip>
 
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                Группа "Камера {{casesList[0].zone}}"
-              </mat-expansion-panel-header>
-              <mat-card *ngFor="let item of casesList" class="mt-2 mb-2">
-                <mat-card-content class="case-item_container">
-                  <div class="case-item_left-side">
-                    <div class="case-item_title">Зона {{ item.zone }} | {{ item.title }}</div>
-                    <div class="case-item_tags mt-2">
-                      <mat-chip-list class="tags-list tags-people">
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="!item.isPeopleAllowed"
-                                  color="warn">
-                          ЛЮДИ
-                        </mat-chip>
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.isPeopleAllowed"
-                                  color="warn">
-                          До {{item.peopleQuantity}} человек
-                        </mat-chip>
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.isPeopleAllowed && item.isPersonalProtectionRequired"
-                                  color="warn">
-                          СИЗ
-                        </mat-chip>
-                      </mat-chip-list>
-                      <mat-chip-list class="tags-list tags-factors">
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.smoke">
-                          ДЫМ
-                        </mat-chip>
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.fire">
-                          ОГОНЬ
-                        </mat-chip>
-                      </mat-chip-list>
+                          <mat-chip class="tags-list_item"
+                                    *ngIf="situation.detectionFrame"
+                                    color="warn">
+                            Область ограничена
+                          </mat-chip>
+                        </mat-chip-list>
+                        <mat-chip-list class="tags-list tags-people">
+                          <mat-chip class="tags-list_item"
+                                    *ngIf="situation.dateTime">
+                            {{ situation.dateTime.rangeFrom | date: "d/L/yyyy:H-m" }} - {{ situation.dateTime.rangeTo | date: "d/L/yyyy:H-m" }}
+                          </mat-chip>
+                        </mat-chip-list>
+                      </div>
                     </div>
-                  </div>
-                  <div class="case-item_status">
-                    <mat-checkbox
-                      [checked]="item.status"
-                      (change)="checked(item.id)"
-                      [labelPosition]="after"
-                      [disabled]="false">
-                    </mat-checkbox>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-
-              <mat-action-row>
-                <button mat-flat-button color="primary" class="mr-2">Включить всю группу</button>
-                <button mat-raised-button color="warn" class="ml-2">Выключить всю группу</button>
-              </mat-action-row>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                Группа "Камера 1"
-              </mat-expansion-panel-header>
-              <mat-card *ngFor="let item of casesList" class="mt-2 mb-2">
-                <mat-card-content class="case-item_container">
-                  <div class="case-item_left-side">
-                    <div class="case-item_title">Зона {{ item.zone }} | {{ item.title }}</div>
-                    <div class="case-item_tags mt-2">
-                      <mat-chip-list class="tags-list tags-people">
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="!item.isPeopleAllowed"
-                                  color="warn">
-                          ЛЮДИ
-                        </mat-chip>
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.isPeopleAllowed"
-                                  color="warn">
-                          До {{item.peopleQuantity}} человек
-                        </mat-chip>
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.isPeopleAllowed && item.isPersonalProtectionRequired"
-                                  color="warn">
-                          СИЗ
-                        </mat-chip>
-                      </mat-chip-list>
-                      <mat-chip-list class="tags-list tags-factors">
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.smoke">
-                          ДЫМ
-                        </mat-chip>
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.fire">
-                          ОГОНЬ
-                        </mat-chip>
-                      </mat-chip-list>
+                    <div class="case-item_status">
+                      <mat-checkbox
+                        [checked]="situation.isEnabled"
+                        (change)="checked(situation.id)"
+                        [disabled]="false">
+                      </mat-checkbox>
                     </div>
-                  </div>
-                  <div class="case-item_status">
-                    <mat-checkbox
-                      [checked]="item.status"
-                      (change)="checked(item.id)"
-                      [labelPosition]="after"
-                      [disabled]="false">
-                    </mat-checkbox>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-
-              <mat-action-row>
-                <button mat-flat-button color="primary" class="mr-2">Включить всю группу</button>
-                <button mat-raised-button color="warn" class="ml-2">Выключить всю группу</button>
-              </mat-action-row>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                Группа "Камера 7"
-              </mat-expansion-panel-header>
-              <mat-card *ngFor="let item of casesList" class="mt-2 mb-2">
-                <mat-card-content class="case-item_container">
-                  <div class="case-item_left-side">
-                    <div class="case-item_title">Зона {{ item.zone }} | {{ item.title }}</div>
-                    <div class="case-item_tags mt-2">
-                      <mat-chip-list class="tags-list tags-people">
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="!item.isPeopleAllowed"
-                                  color="warn">
-                          ЛЮДИ
-                        </mat-chip>
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.isPeopleAllowed"
-                                  color="warn">
-                          До {{item.peopleQuantity}} человек
-                        </mat-chip>
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.isPeopleAllowed && item.isPersonalProtectionRequired"
-                                  color="warn">
-                          СИЗ
-                        </mat-chip>
-                      </mat-chip-list>
-                      <mat-chip-list class="tags-list tags-factors">
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.smoke">
-                          ДЫМ
-                        </mat-chip>
-                        <mat-chip class="tags-list_item"
-                                  *ngIf="item.fire">
-                          ОГОНЬ
-                        </mat-chip>
-                      </mat-chip-list>
-                    </div>
-                  </div>
-                  <div class="case-item_status">
-                    <mat-checkbox
-                      [checked]="item.status"
-                      (change)="checked(item.id)"
-                      [labelPosition]="after"
-                      [disabled]="false">
-                    </mat-checkbox>
-                  </div>
-                </mat-card-content>
-              </mat-card>
+                  </mat-card-content>
+                  <mat-card-actions>
+                    <button
+                      (click)="editSituation(situation.id)"
+                      mat-stroked-button
+                      class="situation-item_edit">
+                      <mat-icon>edit</mat-icon> Редактировать
+                    </button>
+                  </mat-card-actions>
+                </mat-card>
+              </div>
 
               <mat-action-row>
                 <button mat-flat-button color="primary" class="mr-2">Включить всю группу</button>

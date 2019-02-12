@@ -2,7 +2,7 @@
   <mat-card class="scenarios-form_item">
     <mat-card-header>
       <mat-card-title>
-        Создать сценарий
+        Редактирование ситуации
       </mat-card-title>
     </mat-card-header>
     <mat-divider></mat-divider>
@@ -20,7 +20,44 @@
               >
             </mat-form-field>
             <br>
-            <mat-form-field class="w-25">
+            <mat-form-field class="mr-2">
+              <mat-select placeholder="Эскалация ситуации"
+                          formControlName="escalationType"
+                          multiple>
+                <mat-option
+                  *ngFor="let item of availableEscalations"
+                  [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="mr-2">
+              <mat-select placeholder="Выбор зоны"
+                          formControlName="selectedZone"
+                          (selectionChange)="selectionCh()"
+                          required>
+                <mat-option
+                  *ngFor="let zone of zonesArray"
+                  [value]="zone.id">
+                  {{ zone.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="ml-2"
+                            *ngIf="addCase.controls.selectedZone.value"
+                            required>
+              <mat-select placeholder="Выбор камеры" formControlName="selectedCamera">
+                <mat-option
+                  *ngFor="let camera of activeCamList"
+                  [value]="camera.id">
+                  {{ camera.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="mr-2">
               <input
                 matInput
                 [required]="!!addCase.value.rangeTo"
@@ -31,7 +68,7 @@
                 [selectMode]="'rangeFrom'">
             </mat-form-field>
             <owl-date-time #dt12></owl-date-time>
-            <mat-form-field class="w-25 ml-4">
+            <mat-form-field class="ml-2">
               <input
                 matInput
                 [required]="!!addCase.value.rangeFrom"
@@ -44,17 +81,20 @@
             <owl-date-time #dt13></owl-date-time>
             <br>
 
-            <mat-checkbox formControlName="isPeopleAllowed">Люди</mat-checkbox>
+            <mat-checkbox
+              formControlName="isPeopleAllowed"
+              indeterminate
+            >
+              Нет людей</mat-checkbox>
             <br>
-            <mat-form-field>
-              <input formControlName="peopleQuantity" type="number" min="0" matInput placeholder="Количество людей">
-            </mat-form-field>
+            <mat-checkbox
+              formControlName="isPersonalProtectionRequired">СИЗ надеты</mat-checkbox>
             <br>
-            <mat-checkbox formControlName="isPersonalProtectionRequired">СИЗ</mat-checkbox>
+            <mat-checkbox
+              formControlName="smoke">Нет дыма</mat-checkbox>
             <br>
-            <mat-checkbox formControlName="smoke">Дым</mat-checkbox>
-            <br>
-            <mat-checkbox formControlName="fire">Огонь</mat-checkbox>
+            <mat-checkbox
+              formControlName="fire">Нет огня</mat-checkbox>
           </form>
         </mat-card-content>
       </mat-card>
@@ -70,7 +110,7 @@
     class="scenarios-form_item"
     [height]="'480'"
     [width]="'640'"
-    [src]="'assets/img/frame.png'"
+    [src]="'assets/img/video.mp4'"
     (created)="created($event)"></Ngx-NgxPolygonDraw>
 </div>
 

@@ -7,11 +7,12 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ScenariosListComponent} from './scenarios-list/scenarios-list.component';
 import {ScenariosFormComponent} from './scenarios-form/scenarios-form.component';
-import {HeaderComponent} from './shared/header/header.component';
-import {FooterComponent} from './shared/footer/footer.component';
+import {HeaderComponent} from './shared/components/header/header.component';
+import {FooterComponent} from './shared/components/footer/footer.component';
 import { OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 
 import {
+  MAT_CHECKBOX_CLICK_ACTION,
   MatBadgeModule,
   MatButtonModule,
   MatButtonToggleModule,
@@ -29,7 +30,7 @@ import {
   MatListModule,
   MatMenuModule, MatNativeDateModule,
   MatProgressSpinnerModule,
-  MatSelectModule,
+  MatSelectModule, MatSlideToggleModule,
   MatToolbarModule
 } from "@angular/material";
 
@@ -45,6 +46,7 @@ import {CommonModule} from "@angular/common";
 import {PolygonDrawComponent} from './polygon-draw/polygon-draw.component';
 import {NgxPolygonDrawModule} from "../../projects/ngx-polygon-draw/src/lib/ngx-polygon-draw.module";
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
+import { SituationItemComponent } from './shared/components/situation-item/situation-item.component';
 // import {VgOverlayPlayModule} from 'videogular2/overlay-play';
 // import {VgBufferingModule} from 'videogular2/buffering';
 
@@ -59,7 +61,8 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
     DashboardComponent,
     VideoReportComponent,
     EventsReportComponent,
-    PolygonDrawComponent
+    PolygonDrawComponent,
+    SituationItemComponent
   ],
   imports: [
     BrowserModule,
@@ -91,6 +94,7 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
     MatProgressSpinnerModule,
     MatButtonToggleModule,
     MatChipsModule,
+    MatSlideToggleModule,
     ReactiveFormsModule,
     MatBadgeModule,
     AppRoutingModule,
@@ -98,7 +102,8 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
     NgxPolygonDrawModule
   ],
   providers: [
-    {provide: OWL_DATE_TIME_LOCALE, useValue: 'ru'}
+    {provide: OWL_DATE_TIME_LOCALE, useValue: 'ru'},
+    {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
   ],
   bootstrap: [AppComponent]
 })

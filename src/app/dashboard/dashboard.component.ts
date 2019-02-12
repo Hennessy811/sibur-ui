@@ -1,5 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component, OnChanges,
+  OnInit,
+  QueryList,
+  SimpleChanges,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {NgxPolygonDrawComponent} from "../../../projects/ngx-polygon-draw/src/lib/ngx-polygon-draw.component";
+import {DataManagementService} from "../shared/services/data-management.service";
+import {SituationModel, ZoneModel} from "../shared/models/situation.model";
+import {ScenariosFormComponent} from "../scenarios-form/scenarios-form.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -8,80 +20,56 @@ import {NgxPolygonDrawComponent} from "../../../projects/ngx-polygon-draw/src/li
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() {
+  isEditing = false;
+  zonesArray: Array<ZoneModel>;
+  editData: SituationModel;
+
+  @ViewChild(NgxPolygonDrawComponent) private poly: NgxPolygonDrawComponent;
+
+  constructor(private dms: DataManagementService) {
+  }
+
+  undo() {
+    this.poly.undo();
   }
 
   created(event) {
     console.log(event);
   }
 
-  @ViewChild(NgxPolygonDrawComponent)
-  private poly: NgxPolygonDrawComponent;
-
-  undo() {
-    this.poly.undo();
+  editSituation(item) {
+// TODO Edit
   }
 
   clearCanvas() {
     this.poly.clear_canvas();
   }
 
-  casesList = [
-    {
-      fire: true,
-      isPeopleAllowed: true,
-      isPersonalProtectionRequired: true,
-      peopleQuantity: 5,
-      rangeFrom: ['Mon Dec 17 2018 14:36:32 GMT+0300 (Москва, стандартное время)', undefined],
-      rangeTo: [undefined, 'Mon Dec 17 2018 14:36:32 GMT+0300 (Москва, стандартное время)'],
-      smoke: true,
-      zone: 3,
-      title: "Стандартный режим"
-    },
-    {
-      fire: true,
-      isPeopleAllowed: true,
-      isPersonalProtectionRequired: true,
-      peopleQuantity: 5,
-      rangeFrom: ['Mon Dec 17 2018 14:36:32 GMT+0300 (Москва, стандартное время)', undefined],
-      rangeTo: [undefined, 'Mon Dec 17 2018 14:36:32 GMT+0300 (Москва, стандартное время)'],
-      smoke: true,
-      zone: 3,
-      title: "Стандартный режим"
-    },
-    {
-      fire: true,
-      isPeopleAllowed: true,
-      isPersonalProtectionRequired: true,
-      peopleQuantity: 5,
-      rangeFrom: ['Mon Dec 17 2018 14:36:32 GMT+0300 (Москва, стандартное время)', undefined],
-      rangeTo: [undefined, 'Mon Dec 17 2018 14:36:32 GMT+0300 (Москва, стандартное время)'],
-      smoke: true,
-      zone: 3,
-      title: "Стандартный режим"
-    },
-  ];
-  isCreating = false;
-
   newCase(event) {
-    this.isCreating = true;
+    this.isEditing = true;
   }
 
   discardAdd() {
-    this.isCreating = false;
+    this.isEditing = false;
   }
 
-  addCase(event) {
-    console.log(event);
-    this.casesList.push(event);
-    this.isCreating = false;
+  addCase(event: SituationModel) {
+    this.isEditing = false;
+    this.editData = event[0];
+    this.dms.addSituation(event[0], event[1]);
   }
 
-  removeCase(event) {
-
+  removeCase(event: string) {
+    this.dms.removeSituation(event);
   }
 
   ngOnInit() {
+    this.dms.getJSON().subscribe(data => {
+      this.zonesArray = data.zones;
+      console.log(this.zonesArray)
+    })
   }
+  //  TODO VideoStream - problems
+  //  TODO Existing/Non-existing criteria
 
 }
